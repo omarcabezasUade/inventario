@@ -13,17 +13,19 @@ def buscar_producto(productos, codigo):
     return posicion
 
 
-def solicitar_producto(productos):
+def solicitar_producto(productos, accion):
     posicion = -1
     if len(productos) == 0:
         print("No hay productos cargados.")
     else:
-        codigo = validar_entero("Código (0 para cancelar): ", 0)
+        print("Puede ver los códigos en la opción 5 del menú principal: Mostrar todos los productos.")
+        mensaje = "Ingrese el código del producto que desea " + accion + " (0 para cancelar): "
+        codigo = validar_entero(mensaje, 0)
         while codigo != 0 and posicion == -1:
             posicion = buscar_producto(productos, codigo)
             if posicion == -1:
                 print("El código", codigo, "no ha sido encontrado. Intente nuevamente.")
-                codigo = validar_entero("Código (0 para cancelar): ", 0)
+                codigo = validar_entero(mensaje, 0)
         if codigo == 0:
             print("Operación cancelada.")
     return posicion
@@ -56,14 +58,14 @@ def alta_producto(productos, categorias):
 
 def consultar_producto(productos):
     print("CONSULTA DE PRODUCTO")
-    posicion = solicitar_producto(productos)
+    posicion = solicitar_producto(productos, "consultar")
     if posicion != -1:
         mostrar_producto(productos[posicion])
 
 
 def modificar_producto(productos, categorias):
     print("MODIFICACIÓN DE PRODUCTO")
-    posicion = solicitar_producto(productos)
+    posicion = solicitar_producto(productos, "modificar")
     if posicion != -1:
         mostrar_producto(productos[posicion])
         opcion = 0
@@ -86,7 +88,7 @@ def modificar_producto(productos, categorias):
 
 def eliminar_producto(productos):
     print("ELIMINACIÓN DE PRODUCTO")
-    posicion = solicitar_producto(productos)
+    posicion = solicitar_producto(productos, "eliminar")
     if posicion != -1:
         mostrar_producto(productos[posicion])
         confirmacion = input("¿Confirma la eliminación? S/N: ")
