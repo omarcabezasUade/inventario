@@ -1,5 +1,6 @@
 from validaciones import validar_entero, validar_texto, validar_precio
-from validaciones import solicitar_categoria, tiene_contenido
+from validaciones import solicitar_categoria
+from menu import mostrar_menu_modificacion
 
 
 def buscar_producto(productos, codigo):
@@ -55,17 +56,22 @@ def modificar_producto(productos, categorias):
         print("El código", codigo, "no ha sido encontrado.")
     else:
         mostrar_producto(productos[posicion])
-        print("Presione Enter para conservar el nombre.")
-        nombre = input("Nuevo nombre: ")
-        while nombre != "" and not tiene_contenido(nombre):
-            print("Ingrese un nombre o presione Enter para conservarlo.")
-            nombre = input("Nuevo nombre: ")
-        if nombre != "":
-            productos[posicion][1] = nombre
-        productos[posicion][2] = solicitar_categoria(categorias)
-        productos[posicion][3] = validar_precio("Precio ($): ")
-        productos[posicion][4] = validar_entero("Stock disponible: ", 0)
-        print("Producto modificado correctamente.")
+        opcion = 0
+        while opcion != 5:
+            opcion = mostrar_menu_modificacion()
+            if opcion == 1:
+                productos[posicion][1] = validar_texto("Nuevo nombre: ")
+            elif opcion == 2:
+                productos[posicion][2] = solicitar_categoria(categorias)
+            elif opcion == 3:
+                productos[posicion][3] = validar_precio("Nuevo precio ($): ")
+            elif opcion == 4:
+                productos[posicion][4] = validar_entero("Nuevo stock: ", 0)
+            if opcion != 5:
+                print()
+                print("Producto modificado correctamente.")
+                mostrar_producto(productos[posicion])
+
 
 
 def eliminar_producto(productos):

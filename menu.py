@@ -13,3 +13,14 @@ def mostrar_menu():
     print("7 - Mostrar estadísticas")
     print("8 - Salir")
     return validar_rango("Seleccione una opción: ", 1, 8)
+
+
+def mostrar_menu_modificacion():
+    print()
+    print("CAMPO A MODIFICAR")
+    print("1 - Nombre")
+    print("2 - Tipo de producto")
+    print("3 - Precio")
+    print("4 - Stock")
+    print("5 - Terminar modificación")
+    return validar_rango("Seleccione una opción: ", 1, 5)
