@@ -45,7 +45,6 @@ def consultar_producto(productos):
         print("El código", codigo, "no ha sido encontrado.")
     else:
         mostrar_producto(productos[posicion])
-    return posicion
 
 
 def modificar_producto(productos, categorias):
